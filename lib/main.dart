@@ -17,27 +17,29 @@ class Pomodoro extends StatefulWidget {
 class _PomodoroState extends State<Pomodoro> {
   // late int _minutos = 0;
   double percentual = 0.00;
-  int _min = 25;
+  int _min = 00;
   int _seg = 00;
   Color _cor = Colors.white;
   late Timer _timer;
 
+  int _min5 = 5;
+  int _min15 = 15;
+  int _min25 = 25;
+
   _startTimer() {
-    _min = 25;
-    double _temp = (100 / _min) / (_min * 60);
+    _cor = Colors.white;
     _seg = 0;
     percentual = 0.00;
-    _timer = Timer.periodic(const Duration(milliseconds: 1), (timer) {
+    var _temp = ((100 / _min) / 100) - 0.00000002;
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        print(_temp);
-        percentual += 0.000066; //_temp;
         if (_seg > 0) {
           _seg--;
         } else {
           if (_min > 0) {
             _seg = 59;
             _min--;
-            percentual = 0.00;
+            percentual += _temp;
           } else {
             _timer.cancel();
             _cor = Colors.green;
@@ -49,12 +51,14 @@ class _PomodoroState extends State<Pomodoro> {
   }
 
   _stopTimer() {
-    if (_timer != null) {
-      _timer.cancel();
-      _min = 25;
-      _seg = 0;
-      percentual = 0.00;
-    }
+    setState(() {
+      if (_timer != null) {
+        _timer.cancel();
+        _min = 00;
+        _seg = 00;
+        percentual = 0.00;
+      }
+    });
   }
 
   @override
@@ -120,50 +124,80 @@ class _PomodoroState extends State<Pomodoro> {
                               // ignore: todo
                               //TODO nos itens abaixo
                               Expanded(
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "Estudo",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
+                                  child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  RaisedButton(
+                                    color: const Color(0xff143f61),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "$_min5",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22.0,
+                                        ),
                                       ),
                                     ),
-                                    /* const SizedBox(height: 10.0),
-                                    TextField(
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _minutos = value as int;
-                                        });
-                                      },
-                                    ), */
-                                    Text(
-                                      "$_min",
-                                      style: const TextStyle(
-                                        fontSize: 80.0,
+                                    onPressed: () {
+                                      setState(() {
+                                        _min = _min5;
+                                        _cor = Colors.white;
+                                      });
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    color: const Color(0xff143f61),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "$_min15",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22.0,
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  children: const [
-                                    Text(
-                                      "Descanço",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
+                                    onPressed: () {
+                                      setState(() {
+                                        _min = _min15;
+                                        _cor = Colors.white;
+                                      });
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    color: const Color(0xff143f61),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(100.0),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "$_min25",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 22.0,
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(height: 10.0),
-                                    Text(
-                                      "5",
-                                      style: TextStyle(
-                                        fontSize: 80.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                    onPressed: () {
+                                      setState(() {
+                                        _min = _min25;
+                                        _cor = Colors.white;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ))
                             ],
                           ),
                         ),
