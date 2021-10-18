@@ -90,6 +90,7 @@ class _PomodoroState extends State<Pomodoro> {
                   radius: 250.0,
                   lineWidth: 12.0,
                   progressColor: _cor,
+                  backgroundColor: Colors.black12,
                   center: Text(
                     "$_min:$_seg",
                     style: const TextStyle(
