@@ -146,6 +146,9 @@ class _PomodoroState extends State<Pomodoro> {
                                     ),
                                     onPressed: () {
                                       setState(() {
+                                        if (_timer != null) {
+                                          _stopTimer();
+                                        }
                                         _min = _min5;
                                         _cor = Colors.white;
                                       });
@@ -169,6 +172,9 @@ class _PomodoroState extends State<Pomodoro> {
                                     ),
                                     onPressed: () {
                                       setState(() {
+                                        if (_timer != null) {
+                                          _stopTimer();
+                                        }
                                         _min = _min15;
                                         _cor = Colors.white;
                                       });
@@ -192,6 +198,9 @@ class _PomodoroState extends State<Pomodoro> {
                                     ),
                                     onPressed: () {
                                       setState(() {
+                                        if (_timer != null) {
+                                          _stopTimer();
+                                        }
                                         _min = _min25;
                                         _cor = Colors.white;
                                       });
